@@ -104,13 +104,13 @@ async function getValidToken(): Promise<string> {
                 },
             },
         );
-        if (test.ok) return stored.dropbox_access_token;
+        if (test.ok) return stored.dropbox_access_token as string;
     } catch {
         // Token expired, try refresh
     }
 
     if (!stored.dropbox_refresh_token) throw new Error("No refresh token");
-    const newToken = await refreshAccessToken(stored.dropbox_refresh_token);
+    const newToken = await refreshAccessToken(stored.dropbox_refresh_token as string);
     await browser.storage.local.set({ dropbox_access_token: newToken });
     return newToken;
 }

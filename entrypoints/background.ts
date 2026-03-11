@@ -19,6 +19,7 @@ async function handleMessage(message: { type: string; data?: string }) {
         interactive: true,
       });
 
+      if (!responseUrl) throw new Error('No response from auth flow');
       const code = new URL(responseUrl).searchParams.get('code');
       if (!code) throw new Error('No authorization code received');
 
