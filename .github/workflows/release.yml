@@ -1,0 +1,54 @@
+name: Release Extension
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install
+
+      - name: Build Chrome
+        run: bun run zip
+        env:
+          VITE_DROPBOX_APP_KEY: ${{ secrets.VITE_DROPBOX_APP_KEY }}
+
+      - name: Build Firefox
+        run: bun run zip:firefox
+        env:
+          VITE_DROPBOX_APP_KEY: ${{ secrets.VITE_DROPBOX_APP_KEY }}
+
+      - name: Upload assets to GitHub release
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" \
+            .output/*-chrome.zip \
+            .output/*-firefox.zip
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Chrome Web Store
+        uses: mobilefirstllc/cws-publish@latest
+        with:
+          action: publish
+          client_id: ${{ secrets.CHROME_CLIENT_ID }}
+          client_secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh_token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          extension_id: ${{ secrets.CHROME_EXTENSION_ID }}
+          zip_file: .output/pokechill-saver-*-chrome.zip
+
+      - name: Publish to Firefox Add-ons
+        uses: browser-actions/release-firefox-addon@latest
+        with:
+          addon-id: pokechill-saver@extension
+          addon-path: .output/pokechill-saver-*-firefox.zip
+          source-path: .output/pokechill-saver-*-sources.zip
+          auth-api-issuer: ${{ secrets.AMO_JWT_ISSUER }}
+          auth-api-secret: ${{ secrets.AMO_JWT_SECRET }}

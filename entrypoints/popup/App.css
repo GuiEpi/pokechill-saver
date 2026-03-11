@@ -1,0 +1,123 @@
+.container {
+    padding: 24px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    color: var(--title);
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.checking {
+    color: var(--text-muted);
+    font-size: 18px;
+    padding: 24px 0;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: inherit;
+}
+
+.btn:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-connect {
+    background: var(--btn-connect);
+    color: white;
+}
+
+.btn-save {
+    background: var(--btn-save);
+    color: white;
+}
+
+.btn-load {
+    background: var(--btn-load);
+    color: var(--btn-load-text);
+}
+
+.btn-disconnect {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 15px;
+    padding: 8px;
+}
+
+.btn-disconnect:hover:not(:disabled) {
+    color: var(--error-text);
+    opacity: 1;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.connected-badge {
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    font-size: 15px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.last-sync {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.message {
+    margin-top: 14px;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.message-loading {
+    color: var(--text-muted);
+}
+
+.message-success {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.message-error {
+    background: var(--error-bg);
+    color: var(--error-text);
+}
+
+.footer {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.footer a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
