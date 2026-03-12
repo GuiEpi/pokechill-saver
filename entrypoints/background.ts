@@ -1,5 +1,10 @@
 import { getAuthUrl, exchangeCodeForToken, uploadSave, downloadSave, isAuthenticated, logout } from '@/utils/dropbox';
 
+// Auto-save is only enabled after the user manually saves or loads at least once.
+// This prevents overwriting cloud data when opening the game on a new browser
+// with empty/fresh localStorage.
+let autoSaveEnabled = false;
+
 export default defineBackground(() => {
   browser.runtime.onMessage.addListener((message: { type: string; data?: string }, _sender, sendResponse) => {
     handleMessage(message).then(sendResponse).catch((err) => {
@@ -35,6 +40,7 @@ async function handleMessage(message: { type: string; data?: string }) {
     case 'DROPBOX_SAVE': {
       if (!message.data) throw new Error('No game data to save');
       await uploadSave(message.data);
+      autoSaveEnabled = true;
       const now = Date.now();
       await browser.storage.local.set({ last_sync: now });
       return { success: true, lastSync: now };
@@ -42,6 +48,7 @@ async function handleMessage(message: { type: string; data?: string }) {
 
     case 'DROPBOX_LOAD': {
       const data = await downloadSave();
+      autoSaveEnabled = true;
       return { success: true, data };
     }
 
@@ -58,7 +65,7 @@ async function handleMessage(message: { type: string; data?: string }) {
 
     case 'AUTO_SAVE': {
       const authenticated = await isAuthenticated();
-      if (!authenticated || !message.data) return { success: false };
+      if (!authenticated || !message.data || !autoSaveEnabled) return { success: false };
       await uploadSave(message.data);
       const autoNow = Date.now();
       await browser.storage.local.set({ last_sync: autoNow });
