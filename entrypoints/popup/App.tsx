@@ -3,6 +3,11 @@ import "./App.css";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+type MessageKey = Parameters<typeof browser.i18n.getMessage>[0];
+
+const t = (key: MessageKey, ...args: string[]) =>
+    browser.i18n.getMessage(key, args) || key;
+
 function App() {
     const [connected, setConnected] = useState(false);
     const [status, setStatus] = useState<Status>("idle");
@@ -37,14 +42,14 @@ function App() {
 
     const handleConnect = async () => {
         setStatus("loading");
-        setMessage("Connecting to Dropbox...");
+        setMessage(t("connecting_dropbox"));
         try {
             const res = await browser.runtime.sendMessage({
                 type: "DROPBOX_AUTH",
             });
             if (res.success) {
                 setConnected(true);
-                showMessage("Connected to Dropbox!", "success");
+                showMessage(t("connected_success"), "success");
             } else {
                 const error = res.error || "";
                 if (
@@ -52,12 +57,9 @@ function App() {
                     error.includes("cancelled") ||
                     error.includes("canceled")
                 ) {
-                    showMessage(
-                        "Please approve access to Dropbox to continue.",
-                        "error",
-                    );
+                    showMessage(t("approve_access"), "error");
                 } else {
-                    showMessage(error || "Connection failed", "error");
+                    showMessage(error || t("connection_failed"), "error");
                 }
             }
         } catch (err) {
@@ -67,12 +69,9 @@ function App() {
                 msg.includes("cancelled") ||
                 msg.includes("canceled")
             ) {
-                showMessage(
-                    "Please approve access to Dropbox to continue.",
-                    "error",
-                );
+                showMessage(t("approve_access"), "error");
             } else {
-                showMessage(`Connection failed: ${msg}`, "error");
+                showMessage(`${t("connection_failed")}: ${msg}`, "error");
             }
         }
     };
@@ -80,7 +79,7 @@ function App() {
     const handleDisconnect = async () => {
         await browser.runtime.sendMessage({ type: "DROPBOX_LOGOUT" });
         setConnected(false);
-        showMessage("Disconnected", "success");
+        showMessage(t("disconnected"), "success");
     };
 
     const getPokeChillTab = async (): Promise<number | null> => {
@@ -92,14 +91,11 @@ function App() {
 
     const handleSave = async () => {
         setStatus("loading");
-        setMessage("Saving game data...");
+        setMessage(t("saving_game_data"));
         try {
             const tabId = await getPokeChillTab();
             if (!tabId) {
-                showMessage(
-                    "pokechill tab not found. Open the game first!",
-                    "error",
-                );
+                showMessage(t("tab_not_found"), "error");
                 return;
             }
 
@@ -107,7 +103,7 @@ function App() {
                 type: "GET_GAME_DATA",
             });
             if (!gameRes.success || !gameRes.data) {
-                showMessage("No game data found in pokechill", "error");
+                showMessage(t("no_game_data"), "error");
                 return;
             }
 
@@ -118,25 +114,22 @@ function App() {
 
             if (saveRes.success) {
                 setLastSync(saveRes.lastSync || Date.now());
-                showMessage("Game saved to Dropbox!", "success");
+                showMessage(t("game_saved"), "success");
             } else {
-                showMessage(saveRes.error || "Save failed", "error");
+                showMessage(saveRes.error || t("save_failed"), "error");
             }
         } catch (err) {
-            showMessage(`Save failed: ${err}`, "error");
+            showMessage(`${t("save_failed")}: ${err}`, "error");
         }
     };
 
     const handleLoad = async () => {
         setStatus("loading");
-        setMessage("Loading game data...");
+        setMessage(t("loading_game_data"));
         try {
             const tabId = await getPokeChillTab();
             if (!tabId) {
-                showMessage(
-                    "pokechill tab not found. Open the game first!",
-                    "error",
-                );
+                showMessage(t("tab_not_found"), "error");
                 return;
             }
 
@@ -144,11 +137,11 @@ function App() {
                 type: "DROPBOX_LOAD",
             });
             if (!loadRes.success) {
-                showMessage(loadRes.error || "Load failed", "error");
+                showMessage(loadRes.error || t("load_failed"), "error");
                 return;
             }
             if (!loadRes.data) {
-                showMessage("No save found on Dropbox", "error");
+                showMessage(t("no_save_found"), "error");
                 return;
             }
 
@@ -158,22 +151,19 @@ function App() {
             });
 
             if (setRes.success) {
-                showMessage(
-                    "Game data loaded! Refresh the game page.",
-                    "success",
-                );
+                showMessage(t("game_loaded"), "success");
             } else {
-                showMessage(setRes.error || "Failed to set game data", "error");
+                showMessage(setRes.error || t("set_data_failed"), "error");
             }
         } catch (err) {
-            showMessage(`Load failed: ${err}`, "error");
+            showMessage(`${t("load_failed")}: ${err}`, "error");
         }
     };
 
     if (checking) {
         return (
             <div className="container">
-                <p className="checking">Checking connection...</p>
+                <p className="checking">{t("checking")}</p>
             </div>
         );
     }
@@ -188,15 +178,15 @@ function App() {
                     onClick={handleConnect}
                     disabled={status === "loading"}
                 >
-                    Connect Dropbox
+                    {t("connect_dropbox")}
                 </button>
             ) : (
                 <div className="actions">
                     <div className="connected-badge">
-                        Dropbox Connected
+                        {t("dropbox_connected")}
                         {lastSync && (
                             <span className="last-sync">
-                                Last sync: {formatSync(lastSync)}
+                                {t("last_sync", formatSync(lastSync))}
                             </span>
                         )}
                     </div>
@@ -205,21 +195,21 @@ function App() {
                         onClick={handleSave}
                         disabled={status === "loading"}
                     >
-                        Save to Dropbox
+                        {t("save_to_dropbox")}
                     </button>
                     <button
                         className="btn btn-load"
                         onClick={handleLoad}
                         disabled={status === "loading"}
                     >
-                        Load from Dropbox
+                        {t("load_from_dropbox")}
                     </button>
                     <button
                         className="btn btn-disconnect"
                         onClick={handleDisconnect}
                         disabled={status === "loading"}
                     >
-                        Disconnect
+                        {t("disconnect")}
                     </button>
                 </div>
             )}

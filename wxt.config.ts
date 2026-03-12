@@ -4,8 +4,9 @@ import { defineConfig } from "wxt";
 export default defineConfig({
     modules: ["@wxt-dev/module-react"],
     manifest: {
-        name: "pokechill-saver",
-        description: "Auto-save pokechill game data to Dropbox",
+        name: "__MSG_ext_name__",
+        description: "__MSG_ext_description__",
+        default_locale: "en",
         permissions: ["storage", "identity", "activeTab"],
         host_permissions: ["https://play-pokechill.github.io/*"],
         browser_specific_settings: {

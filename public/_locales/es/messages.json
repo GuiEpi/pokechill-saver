@@ -1,0 +1,79 @@
+{
+    "ext_name": {
+        "message": "pokechill-saver"
+    },
+    "ext_description": {
+        "message": "Guardado automático de datos de pokechill en Dropbox"
+    },
+    "checking": {
+        "message": "Verificando conexión..."
+    },
+    "connect_dropbox": {
+        "message": "Conectar Dropbox"
+    },
+    "dropbox_connected": {
+        "message": "Dropbox conectado"
+    },
+    "last_sync": {
+        "message": "Última sincro: $TIME$",
+        "placeholders": {
+            "TIME": {
+                "content": "$1"
+            }
+        }
+    },
+    "save_to_dropbox": {
+        "message": "Guardar en Dropbox"
+    },
+    "load_from_dropbox": {
+        "message": "Cargar desde Dropbox"
+    },
+    "disconnect": {
+        "message": "Desconectar"
+    },
+    "connecting_dropbox": {
+        "message": "Conectando a Dropbox..."
+    },
+    "connected_success": {
+        "message": "¡Conectado a Dropbox!"
+    },
+    "approve_access": {
+        "message": "Por favor, autoriza el acceso a Dropbox para continuar."
+    },
+    "connection_failed": {
+        "message": "Error de conexión"
+    },
+    "disconnected": {
+        "message": "Desconectado"
+    },
+    "saving_game_data": {
+        "message": "Guardando datos..."
+    },
+    "tab_not_found": {
+        "message": "Pestaña pokechill no encontrada. ¡Abre el juego primero!"
+    },
+    "no_game_data": {
+        "message": "No se encontraron datos de juego en pokechill"
+    },
+    "game_saved": {
+        "message": "¡Partida guardada en Dropbox!"
+    },
+    "save_failed": {
+        "message": "Error al guardar"
+    },
+    "loading_game_data": {
+        "message": "Cargando datos..."
+    },
+    "load_failed": {
+        "message": "Error al cargar"
+    },
+    "no_save_found": {
+        "message": "No se encontró guardado en Dropbox"
+    },
+    "game_loaded": {
+        "message": "¡Datos cargados! Recarga la página del juego."
+    },
+    "set_data_failed": {
+        "message": "Error al establecer los datos de juego"
+    }
+}

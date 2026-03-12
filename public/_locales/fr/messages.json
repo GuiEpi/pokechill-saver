@@ -1,0 +1,79 @@
+{
+    "ext_name": {
+        "message": "pokechill-saver"
+    },
+    "ext_description": {
+        "message": "Sauvegarde automatique des données pokechill sur Dropbox"
+    },
+    "checking": {
+        "message": "Vérification de la connexion..."
+    },
+    "connect_dropbox": {
+        "message": "Connecter Dropbox"
+    },
+    "dropbox_connected": {
+        "message": "Dropbox connecté"
+    },
+    "last_sync": {
+        "message": "Dernière synchro : $TIME$",
+        "placeholders": {
+            "TIME": {
+                "content": "$1"
+            }
+        }
+    },
+    "save_to_dropbox": {
+        "message": "Sauvegarder sur Dropbox"
+    },
+    "load_from_dropbox": {
+        "message": "Charger depuis Dropbox"
+    },
+    "disconnect": {
+        "message": "Déconnecter"
+    },
+    "connecting_dropbox": {
+        "message": "Connexion à Dropbox..."
+    },
+    "connected_success": {
+        "message": "Connecté à Dropbox !"
+    },
+    "approve_access": {
+        "message": "Veuillez autoriser l'accès à Dropbox pour continuer."
+    },
+    "connection_failed": {
+        "message": "Échec de la connexion"
+    },
+    "disconnected": {
+        "message": "Déconnecté"
+    },
+    "saving_game_data": {
+        "message": "Sauvegarde en cours..."
+    },
+    "tab_not_found": {
+        "message": "Onglet pokechill introuvable. Ouvrez le jeu d'abord !"
+    },
+    "no_game_data": {
+        "message": "Aucune donnée de jeu trouvée dans pokechill"
+    },
+    "game_saved": {
+        "message": "Partie sauvegardée sur Dropbox !"
+    },
+    "save_failed": {
+        "message": "Échec de la sauvegarde"
+    },
+    "loading_game_data": {
+        "message": "Chargement des données..."
+    },
+    "load_failed": {
+        "message": "Échec du chargement"
+    },
+    "no_save_found": {
+        "message": "Aucune sauvegarde trouvée sur Dropbox"
+    },
+    "game_loaded": {
+        "message": "Données chargées ! Rafraîchissez la page du jeu."
+    },
+    "set_data_failed": {
+        "message": "Impossible de charger les données de jeu"
+    }
+}

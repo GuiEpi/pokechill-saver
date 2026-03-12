@@ -1,0 +1,79 @@
+{
+    "ext_name": {
+        "message": "pokechill-saver"
+    },
+    "ext_description": {
+        "message": "Auto-save pokechill game data to Dropbox"
+    },
+    "checking": {
+        "message": "Checking connection..."
+    },
+    "connect_dropbox": {
+        "message": "Connect Dropbox"
+    },
+    "dropbox_connected": {
+        "message": "Dropbox Connected"
+    },
+    "last_sync": {
+        "message": "Last sync: $TIME$",
+        "placeholders": {
+            "TIME": {
+                "content": "$1"
+            }
+        }
+    },
+    "save_to_dropbox": {
+        "message": "Save to Dropbox"
+    },
+    "load_from_dropbox": {
+        "message": "Load from Dropbox"
+    },
+    "disconnect": {
+        "message": "Disconnect"
+    },
+    "connecting_dropbox": {
+        "message": "Connecting to Dropbox..."
+    },
+    "connected_success": {
+        "message": "Connected to Dropbox!"
+    },
+    "approve_access": {
+        "message": "Please approve access to Dropbox to continue."
+    },
+    "connection_failed": {
+        "message": "Connection failed"
+    },
+    "disconnected": {
+        "message": "Disconnected"
+    },
+    "saving_game_data": {
+        "message": "Saving game data..."
+    },
+    "tab_not_found": {
+        "message": "pokechill tab not found. Open the game first!"
+    },
+    "no_game_data": {
+        "message": "No game data found in pokechill"
+    },
+    "game_saved": {
+        "message": "Game saved to Dropbox!"
+    },
+    "save_failed": {
+        "message": "Save failed"
+    },
+    "loading_game_data": {
+        "message": "Loading game data..."
+    },
+    "load_failed": {
+        "message": "Load failed"
+    },
+    "no_save_found": {
+        "message": "No save found on Dropbox"
+    },
+    "game_loaded": {
+        "message": "Game data loaded! Refresh the game page."
+    },
+    "set_data_failed": {
+        "message": "Failed to set game data"
+    }
+}
